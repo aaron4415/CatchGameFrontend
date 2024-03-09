@@ -3,22 +3,11 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import BackgroundImage from "../Images/bg1.png";
 import Stack from "@mui/material/Stack";
-import LeaderboardDateType from "../Type/leaderboard";
-import {
-  Button,
-  Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-} from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { LeaderboardDateType } from "../Type/leaderboard";
+import LeaderboardDialog from "../Components/leaderboardDialog";
 
 function StartGameMenuPage() {
   const navigate = useNavigate();
@@ -120,37 +109,11 @@ function StartGameMenuPage() {
           </Button>
         </Stack>
       </Card>
-      <Dialog
+      <LeaderboardDialog
         open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Leaderboard"}</DialogTitle>
-        <DialogContent>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Ranking</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Score</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {leaderboard?.map((entry, index) => (
-                <TableRow key={entry.id}>
-                  <TableCell>{entry.ranking}</TableCell>
-                  <TableCell>{entry.name}</TableCell>
-                  <TableCell>{entry.score}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>close</Button>
-        </DialogActions>
-      </Dialog>
+        handleClose={handleClose}
+        leaderboard={leaderboard}
+      />
     </Box>
   );
 }

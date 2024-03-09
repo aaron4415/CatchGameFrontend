@@ -11,10 +11,13 @@ import P3 from "../Images/p3.png";
 import P4 from "../Images/p4.png";
 import { Paper, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import LeaderboardDialog from "../Components/leaderboardDialog";
+import { LeaderboardDateType } from "../Type/leaderboard";
 
 function GamePage() {
   const navigate = useNavigate();
-  const [timeLeft, setTimeLeft] = useState(60); //set time left to 60 seconds
+  const [open, setOpen] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(5); //set time left to 60 seconds
   const [score, setScore] = useState(0);
   const [name, setName] = useState("");
   const [gameOver, setGameOver] = useState(false);
@@ -28,6 +31,9 @@ function GamePage() {
   });
   const [itemVisible, setItemVisible] = useState(true);
   const [isNullInput, setIsNullInput] = useState(false);
+  const [leaderboard, setLeaderboard] = useState<LeaderboardDateType[] | null>(
+    null
+  );
 
   const handleCatchItem = useCallback(() => {
     const image = itemImageRef.current;
@@ -187,7 +193,27 @@ function GamePage() {
       })
         .then((response) => {
           if (response.ok) {
-            navigate("/startGameMenu");
+            //get the leaderboard data
+            fetch(process.env.REACT_APP_API_URL + "/leaderboard", {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+              .then((response) => {
+                response
+                  .json()
+                  .then((responseData: { data: LeaderboardDateType[] }) => {
+                    const { data } = responseData;
+                    setLeaderboard(data);
+                  });
+              })
+              .catch((error) => {
+                console.log(error); // Log the error for debugging
+                // Handle any error that occurs during the API request
+                // ...
+              });
+            setOpen(true);
             // Handle the response from the API
           }
         })
@@ -196,6 +222,11 @@ function GamePage() {
           // ...
         });
     }
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    navigate("/startGameMenu");
   };
 
   const getRandomImage = () => {
@@ -342,6 +373,11 @@ function GamePage() {
           </form>
         </Box>
       )}
+      <LeaderboardDialog
+        open={open}
+        handleClose={handleClose}
+        leaderboard={leaderboard}
+      />
     </Box>
   );
 }
