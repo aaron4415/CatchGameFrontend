@@ -17,7 +17,7 @@ import { LeaderboardDateType } from "../Type/leaderboard";
 function GamePage() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(5); //set time left to 60 seconds
+  const [timeLeft, setTimeLeft] = useState(60); //set time left to 60 seconds
   const [score, setScore] = useState(0);
   const [name, setName] = useState("");
   const [gameOver, setGameOver] = useState(false);
