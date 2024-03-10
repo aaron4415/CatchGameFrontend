@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Catcher from "../Images/boat.png";
 import E1 from "../Images/e1.png";
 import E2 from "../Images/e2.png";
@@ -9,7 +7,7 @@ import P1 from "../Images/p1.png";
 import P2 from "../Images/p2.png";
 import P3 from "../Images/p3.png";
 import P4 from "../Images/p4.png";
-import { Paper, Stack, Typography } from "@mui/material";
+import { Paper, Stack, Typography, TextField, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import LeaderboardDialog from "../Components/leaderboardDialog";
 import { LeaderboardDateType } from "../Type/leaderboard";

@@ -1,9 +1,5 @@
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
 import BackgroundImage from "../Images/bg1.png";
-import Stack from "@mui/material/Stack";
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, Stack, Box, Card, CardMedia } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { LeaderboardDateType } from "../Type/leaderboard";
